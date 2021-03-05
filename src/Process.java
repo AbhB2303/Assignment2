@@ -1,14 +1,28 @@
 public class Process implements Runnable{
     //instance variables
     //always positive values
-    int processID;
-    int readyTime; //when the process is ready
-    int serviceTime; //total CPU usage required by each process
+    private char userID;
+    private int processID;
+    private int readyTime; //when the process is ready
+    private int serviceTime; //total CPU usage required by each process
+    private boolean started;
+    private int processQuantum;
+
+    public Process()
+    {
+        started = false;
+    }
+
+    //getters and setters
+    public int getProcessQuantum(){ return processQuantum; }
+    public void setProcessQuantum(int quantum){ this.processQuantum = quantum; }
+
+    public char getUserID(){ return userID; }
+    public void setUserID(char ID){ this.userID = ID; }
 
     public int getProcessID() {
         return processID;
     }
-
     public void setProcessID(int processID) {
         this.processID = processID;
     }
@@ -16,7 +30,6 @@ public class Process implements Runnable{
     public int getReadyTime() {
         return readyTime;
     }
-
     public void setReadyTime(int readyTime) {
         this.readyTime = readyTime;
     }
@@ -24,21 +37,18 @@ public class Process implements Runnable{
     public int getServiceTime() {
         return serviceTime;
     }
-
     public void setServiceTime(int serviceTime) {
         this.serviceTime = serviceTime;
     }
 
-    @Override
-    public String toString() {
-        return "Process " + processID +" {" +
-                "readyTime = " + readyTime +
-                ", serviceTime =" + serviceTime +
-                '}';
-    }
-    synchronized public void run() {
-        long start = System.currentTimeMillis();
-       // System.out.println("Process: "+ processID + " is running");
+    public boolean getStarted(){ return started;}
+    public void setStarted(boolean isStarted){ this.started = isStarted; }
 
+    public void run() {
+        //service time changed according to how long process executes
+        if(getProcessQuantum() < getServiceTime()){
+            setServiceTime(getServiceTime() - getProcessQuantum());
+        }
+        else setServiceTime(0);
     }
 }

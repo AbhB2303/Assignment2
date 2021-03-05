@@ -6,17 +6,17 @@ Programming Assignment 2
 Simulating Fair-shar Process Scheduling
 */
 
-import java.util.*;
-import java.time.*;
-
 public class Main {
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) {
 
         Scheduler scheduler = new Scheduler();
-        Thread ScheduleThread = new Thread(scheduler);
-        ScheduleThread.start(); //starts scheduling thread
+        scheduler.OutputToFile("", false);
+
+        Thread SchedulerThread = new Thread(scheduler);
+        SchedulerThread.start(); //starts scheduling thread
+
         try {
-            ScheduleThread.join();
+            SchedulerThread.join();
         }catch (Exception e)
         {
             e.printStackTrace();
