@@ -1,7 +1,7 @@
 public class Clock {
-    private int Clock;
+    static private int Clock;
 
-    public void Tick(int tick)
+    static public void Tick(int tick)
     {
 
         try {
@@ -12,7 +12,7 @@ public class Clock {
         }
     }
 
-    public int getTime()
+    static public int getTime()
     {
         return Clock;
     }
